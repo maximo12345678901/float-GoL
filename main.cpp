@@ -6,11 +6,11 @@
 #include <omp.h>
 #include <iostream>
 
-uint windowWidth = 1600;
-uint windowHeight = 900;
+uint windowWidth = 2000;
+uint windowHeight = 1000;
 
-int gridWidth = 800;
-int gridHeight = 450;
+int gridWidth = 1000;
+int gridHeight = 500;
 
 int t = 0;
 
@@ -32,7 +32,7 @@ std::vector<std::vector<float>> convolutionGrid {
 };
 
 float activation (float x) {
-  // if (x == 3.0f || x == 4.0f || x == 11.0f || x == 12.0f) {
+  // if (x == 3.0f || x == 11.0f || x == 12.0f) {
   //   x = 1.0f;
   // }
   // else {
@@ -105,11 +105,12 @@ int main() {
   sf::Sprite sprite(texture);
   sprite.setScale(sf::Vector2f((float)windowWidth / (float)gridWidth, (float)windowHeight / (float)gridHeight));
 
-  sf::RenderWindow window(sf::VideoMode({windowWidth, windowHeight}), "lively game of life");
+  sf::RenderWindow window(sf::VideoMode({windowWidth, windowHeight}), "convolution cellular automaton");
   window.setFramerateLimit(240);
 
   omp_set_num_threads(6);
 
+  fillRandomly(0.0f, 1.0f);
   //                -- loop -- 
   while(window.isOpen()) {
     while (const std::optional event = window.pollEvent()) {
